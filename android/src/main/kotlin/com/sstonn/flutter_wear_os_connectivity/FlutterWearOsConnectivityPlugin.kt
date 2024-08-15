@@ -90,11 +90,11 @@ class FlutterWearOsConnectivityPlugin : FlutterPlugin, MethodCallHandler, Activi
                                 nodes.map { it.toRawMap() }
                             )
                         }
-                    } catch (_: Exception) {
+                    } catch (error: Exception) {
                         handleFlutterError(
                             result,
                             "Can't retrieve connected devices, please try again",
-                            _
+                            error
                         )
                     }
                 }
