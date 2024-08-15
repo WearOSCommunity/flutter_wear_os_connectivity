@@ -93,7 +93,8 @@ class FlutterWearOsConnectivityPlugin : FlutterPlugin, MethodCallHandler, Activi
                     } catch (_: Exception) {
                         handleFlutterError(
                             result,
-                            "Can't retrieve connected devices, please try again"
+                            "Can't retrieve connected devices, please try again",
+                            _
                         )
                     }
                 }
@@ -656,9 +657,9 @@ class FlutterWearOsConnectivityPlugin : FlutterPlugin, MethodCallHandler, Activi
     }
 
 
-    private fun handleFlutterError(result: Result, message: String) {
+    private fun handleFlutterError(result: Result, message: String, exception: Exception) {
         scope(Dispatchers.Main).launch {
-            result.error("500", message, null)
+            result.error("500", message + "\n" + exception, null)
         }
     }
 
