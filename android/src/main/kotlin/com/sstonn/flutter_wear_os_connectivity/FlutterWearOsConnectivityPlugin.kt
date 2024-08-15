@@ -657,11 +657,16 @@ class FlutterWearOsConnectivityPlugin : FlutterPlugin, MethodCallHandler, Activi
     }
 
 
-    private fun handleFlutterError(result: Result, message: String, exception: Exception?) {
+    private fun handleFlutterError(result: Result, message: String, exception: Exception? = null) {
         scope(Dispatchers.Main).launch {
-            result.error("500", message + "\n" + exception, exception)
+            val errorMessage = if (exception != null) {
+                "$message\n${exception.message}"
+            } else {
+                message
+            }
+            result.error("500", errorMessage, exception)
         }
-    }
+    }    
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
         this.activityBinding = binding
