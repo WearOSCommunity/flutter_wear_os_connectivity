@@ -657,7 +657,7 @@ class FlutterWearOsConnectivityPlugin : FlutterPlugin, MethodCallHandler, Activi
     }
 
 
-    private fun handleFlutterError(result: Result, message: String, exception: Exception) {
+    private fun handleFlutterError(result: Result, message: String, exception: Exception?) {
         scope(Dispatchers.Main).launch {
             result.error("500", message + "\n" + exception, exception)
         }
