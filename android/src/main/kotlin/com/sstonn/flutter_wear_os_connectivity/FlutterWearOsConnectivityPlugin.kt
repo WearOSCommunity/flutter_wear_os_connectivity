@@ -86,8 +86,9 @@ class FlutterWearOsConnectivityPlugin : FlutterPlugin, MethodCallHandler, Activi
                     try {
                         val nodes = nodeClient.connectedNodes.await()
                         scope(Dispatchers.Main).launch {
+                            val r = nodes.map { it.toRawMap() }
                             result.success(
-                                nodes.map { it.toRawMap() }
+                                r
                             )
                         }
                     } catch (error: Exception) {
